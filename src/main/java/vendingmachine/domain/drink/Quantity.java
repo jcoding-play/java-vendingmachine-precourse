@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Quantity {
     private static final int MINIMUM_QUANTITY = 0;
+    private static final int SOLD_OUT_QUANTITY = 0;
 
     private final int quantity;
 
@@ -17,6 +18,10 @@ public class Quantity {
             throw new IllegalArgumentException(
                     String.format("상품 수량이 %d보다 작을 수 없습니다.", MINIMUM_QUANTITY));
         }
+    }
+
+    public boolean isZero() {
+        return this.quantity == SOLD_OUT_QUANTITY;
     }
 
     @Override

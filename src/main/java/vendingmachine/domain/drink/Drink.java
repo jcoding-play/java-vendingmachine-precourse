@@ -13,6 +13,10 @@ public class Drink {
         this.quantity = new Quantity(quantity);
     }
 
+    public boolean isSoldOut() {
+        return quantity.isZero();
+    }
+
     public Name getName() {
         return name;
     }

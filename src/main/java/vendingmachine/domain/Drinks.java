@@ -40,6 +40,11 @@ public class Drinks {
                 .get();
     }
 
+    public boolean isSoldOut() {
+        return drinks.stream()
+                .allMatch(Drink::isSoldOut);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
