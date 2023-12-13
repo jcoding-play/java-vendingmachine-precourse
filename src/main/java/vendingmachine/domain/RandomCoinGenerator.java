@@ -26,13 +26,18 @@ public class RandomCoinGenerator implements CoinGenerator {
 
         while (canGenerateCoin(totalAmount, coinAmounts)) {
             int coinAmount = Randoms.pickNumberInList(coinAmounts);
-            totalAmount.subtractBy(coinAmount);
 
-            Coin coin = Coin.from(coinAmount);
-            result.put(coin, result.get(coin) + 1);
+            if (isGreaterThanOrEqualTo(totalAmount, coinAmount)) {
+                totalAmount.subtractBy(coinAmount);
+                Coin coin = Coin.from(coinAmount);
+                result.put(coin, result.get(coin) + 1);
+            }
         }
-
         return result;
+    }
+
+    private boolean isGreaterThanOrEqualTo(TotalAmount totalAmount, int amount) {
+        return totalAmount.isGreaterThan(amount) || totalAmount.isEqual(amount);
     }
 
     private Map<Coin, Integer> initialize() {
@@ -47,7 +52,7 @@ public class RandomCoinGenerator implements CoinGenerator {
 
     private boolean canGenerateCoin(TotalAmount totalAmount, List<Integer> coinAmounts) {
         int minCoinAmount = findMinCoinAmount(coinAmounts);
-        return totalAmount.isGreaterThan(minCoinAmount) || totalAmount.isEqual(minCoinAmount);
+        return isGreaterThanOrEqualTo(totalAmount, minCoinAmount);
     }
 
     private int findMinCoinAmount(List<Integer> coinAmounts) {
