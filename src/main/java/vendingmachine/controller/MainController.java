@@ -1,15 +1,13 @@
 package vendingmachine.controller;
 
 import vendingmachine.Coin;
+import vendingmachine.converter.Converter;
 import vendingmachine.domain.*;
-import vendingmachine.domain.drink.Drink;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public class MainController {
     private final InputView inputView;
@@ -21,51 +19,69 @@ public class MainController {
     }
 
     public void run() {
-        int readTotalAmount = inputView.readTotalAmount();
-        TotalAmount totalAmount = new TotalAmount(readTotalAmount);
+        Map<Coin, Integer> coins = repeatTemplate(this::generateCoins);
+        outputView.printCoins(coins);
+
+        VendingMachine vendingMachine = initializeVendingMachine(coins);
+        buyDrinks(vendingMachine);
+        showChanges(vendingMachine);
+    }
+
+    private Map<Coin, Integer> generateCoins() {
+        TotalAmount totalAmount = readTotalAmount();
 
         CoinGenerator coinGenerator = new RandomCoinGenerator();
-        Map<Coin, Integer> coins = coinGenerator.generate(totalAmount);
-        outputView.printCoins(coins);
+        return coinGenerator.generate(totalAmount);
+    }
+
+    private TotalAmount readTotalAmount() {
+        int readTotalAmount = inputView.readTotalAmount();
+        return new TotalAmount(readTotalAmount);
+    }
+
+    private VendingMachine initializeVendingMachine(Map<Coin, Integer> coins) {
         CoinRepository coinRepository = new CoinRepository(coins);
+        Drinks drinks = repeatTemplate(this::readDrinks);
+        InputAmount inputAmount = repeatTemplate(this::readInputAmount);
 
+        return new VendingMachine(coinRepository, drinks, inputAmount);
+    }
+
+    private Drinks readDrinks() {
         String readDrinks = inputView.readDrinks();
-        Drinks drinks = toDrinks(readDrinks);
+        return Converter.toDrinks(readDrinks);
+    }
 
+    private InputAmount readInputAmount() {
         int readInputAmount = inputView.readInputAmount();
-        InputAmount inputAmount = new InputAmount(readInputAmount);
+        return new InputAmount(readInputAmount);
+    }
 
-        VendingMachine vendingMachine = new VendingMachine(coinRepository, drinks, inputAmount);
-
+    private void buyDrinks(VendingMachine vendingMachine) {
         while (vendingMachine.canBuyDrink()) {
-            outputView.printInputAmount(vendingMachine.getInputAmount());
-            String drinkName = inputView.readDrinkName();
-            vendingMachine.buyDrink(drinkName);
+            showInputAmount(vendingMachine);
+            buyDrink(vendingMachine);
         }
+    }
 
+    private void showInputAmount(VendingMachine vendingMachine) {
         outputView.printInputAmount(vendingMachine.getInputAmount());
+    }
+
+    private void buyDrink(VendingMachine vendingMachine) {
+        try {
+            vendingMachine.buyDrink(inputView.readDrinkName());
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            buyDrink(vendingMachine);
+        }
+    }
+
+    private void showChanges(VendingMachine vendingMachine) {
+        showInputAmount(vendingMachine);
+
         Map<Coin, Integer> changes = vendingMachine.giveChange();
         outputView.printChanges(changes);
-    }
-
-    private Drinks toDrinks(String readDrinks) {
-        return Arrays.stream(readDrinks.split(";"))
-                .map(this::substring)
-                .map(this::generateDrinkFrom)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Drinks::new));
-    }
-
-    private String substring(String readDrink) {
-        return readDrink.substring(1, readDrink.length() - 1);
-    }
-
-    private Drink generateDrinkFrom(String readDrink) {
-        String[] input = readDrink.split(",");
-        String name = input[0];
-        int price = Integer.parseInt(input[1]);
-        int quantity = Integer.parseInt(input[2]);
-
-        return new Drink(name, price, quantity);
     }
 
     private <T> T repeatTemplate(Supplier<T> inputReader) {
