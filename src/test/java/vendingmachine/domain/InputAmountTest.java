@@ -3,8 +3,7 @@ package vendingmachine.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 class InputAmountTest {
 
@@ -29,5 +28,14 @@ class InputAmountTest {
         assertThatThrownBy(() -> new InputAmount(111))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("투입 금액은 10원 단위어야 합니다.");
+    }
+
+    @Test
+    @DisplayName("투입 금액에서 입력된 금액만큼 뺄 수 있다.")
+    void subtractBy() {
+        InputAmount inputAmount = new InputAmount(1000);
+        inputAmount.subtractBy(100);
+
+        assertThat(inputAmount).isEqualTo(new InputAmount(900));
     }
 }
