@@ -1,14 +1,19 @@
 package vendingmachine.domain;
 
+import vendingmachine.Coin;
 import vendingmachine.domain.drink.Drink;
 
-public class VendingMachine {
-    private final InputAmount inputAmount;
-    private final Drinks drinks;
+import java.util.Map;
 
-    public VendingMachine(InputAmount inputAmount, Drinks drinks) {
-        this.inputAmount = inputAmount;
+public class VendingMachine {
+    private final CoinRepository coinRepository;
+    private final Drinks drinks;
+    private final InputAmount inputAmount;
+
+    public VendingMachine(CoinRepository coinRepository, Drinks drinks, InputAmount inputAmount) {
+        this.coinRepository = coinRepository;
         this.drinks = drinks;
+        this.inputAmount = inputAmount;
     }
 
     public void buyDrink(String drinkName) {
@@ -37,5 +42,9 @@ public class VendingMachine {
         int minimumPrice = drinks.findMinimumPrice();
 
         return !(inputAmount.isLessThan(minimumPrice) || drinks.isSoldOut());
+    }
+
+    public Map<Coin, Integer> giveChange() {
+        return coinRepository.giveChangeOf(inputAmount);
     }
 }

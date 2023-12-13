@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 
+import vendingmachine.Coin;
 import vendingmachine.utils.Constants;
 
 import java.util.Objects;
@@ -33,6 +34,10 @@ public class InputAmount {
 
     public boolean isLessThan(int minimumPrice) {
         return inputAmount < minimumPrice;
+    }
+
+    public int divideBy(Coin coin) {
+        return coin.divide(inputAmount);
     }
 
     @Override

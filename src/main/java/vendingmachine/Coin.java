@@ -12,8 +12,8 @@ public enum Coin {
         this.amount = amount;
     }
 
-    public int divide(int totalAmount) {
-        return totalAmount / this.amount;
+    public int divide(int amount) {
+        return amount / this.amount;
     }
 
     public int calculateTotalAmount(int quantity) {
