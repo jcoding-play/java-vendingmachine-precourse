@@ -37,4 +37,15 @@ class DrinksTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("판매하는 음료는 최소 1개 이상이어야 합니다.");
     }
+
+    @Test
+    @DisplayName("음료 중 최저 가격을 찾을 수 있다.")
+    void findMinimumPrice() {
+        Drinks drinks = new Drinks(Arrays.asList(
+                new Drink("콜라", 1500, 20),
+                new Drink("사이다", 1000, 10)));
+
+        int result = drinks.findMinimumPrice();
+        assertThat(result).isEqualTo(1000);
+    }
 }
