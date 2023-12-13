@@ -9,11 +9,11 @@ import java.util.stream.Collectors;
 public class OutputView {
     private static final String NEWLINE = System.lineSeparator();
 
-    private static final String ERROR_MESSAGE_FORMAT = "[ERROR] %s\n";
-    private static final String PREFIX_MESSAGE_OF_COIN = "자판기가 보유한 동전";
+    private static final String ERROR_MESSAGE_FORMAT = "[ERROR] %s" + NEWLINE;
+    private static final String PREFIX_MESSAGE_OF_COIN = NEWLINE + "자판기가 보유한 동전";
     private static final String PREFIX_MESSAGE_OF_CHANGE = "잔돈";
     private static final String COIN_MESSAGE_FORMAT = "%d원 - %d개";
-    private static final String INPUT_AMOUNT_MESSAGE_FORMAT = "투입 금액: %d원\n";
+    private static final String INPUT_AMOUNT_MESSAGE_FORMAT = NEWLINE + "투입 금액: %d원" + NEWLINE;
     private static final int FIRST_INDEX = 0;
     private static final int NOTHING_CHANGE_COUNT = 0;
 
