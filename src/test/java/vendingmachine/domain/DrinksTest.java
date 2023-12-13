@@ -2,6 +2,8 @@ package vendingmachine.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import vendingmachine.domain.drink.Drink;
 
 import java.util.Arrays;
@@ -47,5 +49,17 @@ class DrinksTest {
 
         int result = drinks.findMinimumPrice();
         assertThat(result).isEqualTo(1000);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"0, 1, false", "1, 0, false", "1, 1, false", "0, 0, true"})
+    @DisplayName("음료가 전부 팔렸는지 알 수 있다.")
+    void isSoldOut(int firstQuantity, int secondQuantity, boolean expected) {
+        Drinks drinks = new Drinks(Arrays.asList(
+                new Drink("콜라", 1500, firstQuantity),
+                new Drink("사이다", 1000, secondQuantity)));
+
+        boolean actual = drinks.isSoldOut();
+        assertThat(actual).isEqualTo(expected);
     }
 }
