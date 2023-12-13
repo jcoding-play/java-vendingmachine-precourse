@@ -17,6 +17,7 @@ public class CoinRepository {
 
         for (Coin coin : store.keySet()) {
             int changeCount = calculateChangeCount(inputAmount, coin);
+            inputAmount.subtractBy(coin.calculateTotalAmount(changeCount));
 
             changes.put(coin, changeCount);
             store.put(coin, store.get(coin) - changeCount);
