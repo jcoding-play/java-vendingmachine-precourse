@@ -14,7 +14,7 @@ public class InputValidator {
     private static final Pattern VALID_FORMAT = Pattern.compile("\\[.+,-?[0-9]+,-?[0-9]+](;\\[.+,-?[0-9]+,-?[0-9]+])");
     private static final Pattern ONLY_DIGIT = Pattern.compile("-?[0-9]+");
 
-    protected void validateInput(String input) {
+    public void validateInput(String input) {
         if (StringUtils.isBlank(input)) {
             throw new IllegalArgumentException(INPUT_BLANK_EXCEPTION_MESSAGE);
         }
