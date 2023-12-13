@@ -34,4 +34,13 @@ class QuantityTest {
 
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("수량을 줄일 수 있다.")
+    void decrease() {
+        Quantity quantity = new Quantity(1);
+        quantity.decrease();
+
+        assertThat(quantity).isEqualTo(new Quantity(0));
+    }
 }
