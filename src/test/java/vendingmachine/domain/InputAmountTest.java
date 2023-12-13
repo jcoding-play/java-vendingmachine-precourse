@@ -1,11 +1,20 @@
 package vendingmachine.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 class InputAmountTest {
+    private InputAmount inputAmount;
+
+    @BeforeEach
+    void setUp() {
+        inputAmount = new InputAmount(1000);
+    }
 
     @Test
     @DisplayName("사용자가 투입한 금액을 알 수 있다.")
@@ -33,9 +42,15 @@ class InputAmountTest {
     @Test
     @DisplayName("투입 금액에서 입력된 금액만큼 뺄 수 있다.")
     void subtractBy() {
-        InputAmount inputAmount = new InputAmount(1000);
         inputAmount.subtractBy(100);
-
         assertThat(inputAmount).isEqualTo(new InputAmount(900));
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"900, false", "1100, true"})
+    @DisplayName("입력된 금액이 작은지 알 수 있다.")
+    void isLessThan(int amount, boolean expected) {
+        boolean actual = inputAmount.isLessThan(amount);
+        assertThat(actual).isEqualTo(expected);
     }
 }
