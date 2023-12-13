@@ -12,5 +12,11 @@ public enum Coin {
         this.amount = amount;
     }
 
-    // 추가 기능 구현
+    public int divide(int totalAmount) {
+        return totalAmount / this.amount;
+    }
+
+    public int calculateTotalAmount(int quantity) {
+        return this.amount * quantity;
+    }
 }
