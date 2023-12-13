@@ -11,8 +11,11 @@ public class OutputView {
 
     private static final String ERROR_MESSAGE_FORMAT = "[ERROR] %s\n";
     private static final String PREFIX_MESSAGE_OF_COIN = "자판기가 보유한 동전";
+    private static final String PREFIX_MESSAGE_OF_CHANGE = "잔돈";
     private static final String COIN_MESSAGE_FORMAT = "%d원 - %d개";
+    private static final String INPUT_AMOUNT_MESSAGE_FORMAT = "투입 금액: %d원\n";
     private static final int FIRST_INDEX = 0;
+    private static final int NOTHING_CHANGE_COUNT = 0;
 
     public void printErrorMessage(String errorMessage) {
         System.out.printf(ERROR_MESSAGE_FORMAT, errorMessage);
@@ -37,6 +40,21 @@ public class OutputView {
     }
 
     public void printInputAmount(int inputAmount) {
-        System.out.printf("투입 금액: %d원\n", inputAmount);
+        System.out.printf(INPUT_AMOUNT_MESSAGE_FORMAT, inputAmount);
+    }
+
+    public void printChanges(Map<Coin, Integer> changes) {
+        List<String> changeMessages = generateChangeMessages(changes);
+        changeMessages.add(FIRST_INDEX, PREFIX_MESSAGE_OF_CHANGE);
+
+        System.out.println(String.join(NEWLINE, changeMessages));
+    }
+
+    private List<String> generateChangeMessages(Map<Coin, Integer> changes) {
+        return changes.keySet()
+                .stream()
+                .filter(coin -> changes.get(coin) != NOTHING_CHANGE_COUNT)
+                .map(coin -> generateCoinMessage(coin, changes.get(coin)))
+                .collect(Collectors.toList());
     }
 }
