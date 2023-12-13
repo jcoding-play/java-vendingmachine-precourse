@@ -47,4 +47,8 @@ public class VendingMachine {
     public Map<Coin, Integer> giveChange() {
         return coinRepository.giveChangeOf(inputAmount);
     }
+
+    public int getInputAmount() {
+        return inputAmount.get();
+    }
 }

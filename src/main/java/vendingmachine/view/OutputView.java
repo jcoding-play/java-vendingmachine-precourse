@@ -35,4 +35,8 @@ public class OutputView {
     private String generateCoinMessage(Coin coin, int quantity) {
         return String.format(COIN_MESSAGE_FORMAT, coin.getAmount(), quantity);
     }
+
+    public void printInputAmount(int inputAmount) {
+        System.out.printf("투입 금액: %d원\n", inputAmount);
+    }
 }

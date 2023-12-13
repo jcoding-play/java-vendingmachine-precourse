@@ -40,6 +40,10 @@ public class InputAmount {
         return coin.divide(inputAmount);
     }
 
+    public int get() {
+        return inputAmount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
