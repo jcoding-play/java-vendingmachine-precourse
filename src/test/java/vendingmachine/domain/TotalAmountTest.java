@@ -2,6 +2,8 @@ package vendingmachine.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -38,5 +40,14 @@ class TotalAmountTest {
         totalAmount.subtractBy(10);
 
         assertThat(totalAmount).isEqualTo(new TotalAmount(990));
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1100, false", "900, true"})
+    @DisplayName("입력된 값보다 큰지 알 수 있다.")
+    void isGreaterThan(int amount, boolean expected) {
+        TotalAmount totalAmount = new TotalAmount(1000);
+        boolean actual = totalAmount.isGreaterThan(amount);
+        assertThat(actual).isEqualTo(expected);
     }
 }
