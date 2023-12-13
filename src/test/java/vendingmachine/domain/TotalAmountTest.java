@@ -30,4 +30,13 @@ class TotalAmountTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("자판기가 보유한 금액은 10원 단위어야 합니다.");
     }
+
+    @Test
+    @DisplayName("입력된 값으로 뺄 수 있다.")
+    void subtractBy() {
+        TotalAmount totalAmount = new TotalAmount(1000);
+        totalAmount.subtractBy(10);
+
+        assertThat(totalAmount).isEqualTo(new TotalAmount(990));
+    }
 }
