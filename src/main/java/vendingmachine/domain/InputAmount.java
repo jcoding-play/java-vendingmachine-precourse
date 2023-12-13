@@ -5,8 +5,6 @@ import vendingmachine.utils.Constants;
 import java.util.Objects;
 
 public class InputAmount {
-    private static final int MINIMUM_TOTAL_AMOUNT = 0;
-
     private final int inputAmount;
 
     public InputAmount(int inputAmount) {
@@ -15,9 +13,9 @@ public class InputAmount {
     }
 
     private void validateInputAmount(int inputAmount) {
-        if (inputAmount < MINIMUM_TOTAL_AMOUNT) {
+        if (inputAmount < Constants.MINIMUM_AMOUNT) {
             throw new IllegalArgumentException(
-                    String.format("투입 금액이 %d원보다 작을 수 없습니다.", MINIMUM_TOTAL_AMOUNT));
+                    String.format("투입 금액이 %d원보다 작을 수 없습니다.", Constants.MINIMUM_AMOUNT));
         }
         if (isInvalidAmount(inputAmount)) {
             throw new IllegalArgumentException(

@@ -9,8 +9,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class TotalAmount {
-    private static final int MINIMUM_TOTAL_AMOUNT = 0;
-
     private int totalAmount;
 
     public TotalAmount(int totalAmount) {
@@ -19,9 +17,9 @@ public class TotalAmount {
     }
 
     private void validateTotalAmount(int totalAmount) {
-        if (totalAmount < MINIMUM_TOTAL_AMOUNT) {
+        if (totalAmount < Constants.MINIMUM_AMOUNT) {
             throw new IllegalArgumentException(
-                    String.format("자판기가 보유한 금액이 %d원보다 작을 수 없습니다.", MINIMUM_TOTAL_AMOUNT));
+                    String.format("자판기가 보유한 금액이 %d원보다 작을 수 없습니다.", Constants.MINIMUM_AMOUNT));
         }
         if (isInvalidAmount(totalAmount)) {
             throw new IllegalArgumentException(
