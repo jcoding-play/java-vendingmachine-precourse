@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import vendingmachine.Coin;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
@@ -51,6 +52,14 @@ class InputAmountTest {
     @DisplayName("입력된 금액이 작은지 알 수 있다.")
     void isLessThan(int amount, boolean expected) {
         boolean actual = inputAmount.isLessThan(amount);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"COIN_500, 2", "COIN_100, 10", "COIN_50, 20", "COIN_10, 100"})
+    @DisplayName("투입 금액을 동전의 값으로 나눌 수 있다.")
+    void divideBy(Coin coin, int expected) {
+        int actual = inputAmount.divideBy(coin);
         assertThat(actual).isEqualTo(expected);
     }
 }
