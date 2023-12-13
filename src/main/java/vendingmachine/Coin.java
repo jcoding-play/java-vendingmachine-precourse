@@ -33,10 +33,6 @@ public enum Coin {
         return this.amount * quantity;
     }
 
-    public boolean isTenCoin() {
-        return this == COIN_10;
-    }
-
     public int getAmount() {
         return amount;
     }
