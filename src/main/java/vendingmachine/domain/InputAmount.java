@@ -1,11 +1,12 @@
 package vendingmachine.domain;
 
+import vendingmachine.domain.drink.Price;
 import vendingmachine.utils.Constants;
 
 import java.util.Objects;
 
 public class InputAmount {
-    private final int inputAmount;
+    private int inputAmount;
 
     public InputAmount(int inputAmount) {
         validateInputAmount(inputAmount);
@@ -25,6 +26,10 @@ public class InputAmount {
 
     private boolean isInvalidAmount(int inputAmount) {
         return inputAmount % Constants.VALID_UNIT != Constants.VALID_REMAINED_AMOUNT;
+    }
+
+    public void subtractBy(Price price) {
+        this.inputAmount = price.subtract(inputAmount);
     }
 
     @Override

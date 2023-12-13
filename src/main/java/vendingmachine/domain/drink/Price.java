@@ -29,6 +29,10 @@ public class Price implements Comparable<Price> {
         return price % Constants.VALID_UNIT != Constants.VALID_REMAINED_AMOUNT;
     }
 
+    public int subtract(int inputAmount) {
+        return inputAmount - price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

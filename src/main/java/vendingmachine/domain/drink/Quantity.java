@@ -6,7 +6,7 @@ public class Quantity {
     private static final int MINIMUM_QUANTITY = 0;
     private static final int SOLD_OUT_QUANTITY = 0;
 
-    private final int quantity;
+    private int quantity;
 
     public Quantity(int quantity) {
         validateQuantity(quantity);
@@ -22,6 +22,10 @@ public class Quantity {
 
     public boolean isZero() {
         return this.quantity == SOLD_OUT_QUANTITY;
+    }
+
+    public void decrease() {
+        this.quantity--;
     }
 
     @Override

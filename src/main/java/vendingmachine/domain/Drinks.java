@@ -45,6 +45,18 @@ public class Drinks {
                 .allMatch(Drink::isSoldOut);
     }
 
+    public boolean contain(String drinkName) {
+        return drinks.stream()
+                .anyMatch(drink -> drink.isMatchName(drinkName));
+    }
+
+    public Drink findDrinkFrom(String drinkName) {
+        return drinks.stream()
+                .filter(drink -> drink.isMatchName(drinkName))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("일치하는 음료가 없습니다."));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

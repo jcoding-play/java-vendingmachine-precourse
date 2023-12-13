@@ -17,6 +17,14 @@ public class Drink {
         return quantity.isZero();
     }
 
+    public boolean isMatchName(String name) {
+        return this.name.isSameName(name);
+    }
+
+    public void decreaseQuantity() {
+        quantity.decrease();
+    }
+
     public Name getName() {
         return name;
     }
