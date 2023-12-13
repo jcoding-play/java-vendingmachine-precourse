@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import vendingmachine.Coin;
+import vendingmachine.utils.Constants;
 
 import java.util.List;
 import java.util.Objects;
@@ -9,8 +10,6 @@ import java.util.stream.IntStream;
 
 public class TotalAmount {
     private static final int MINIMUM_TOTAL_AMOUNT = 0;
-    private static final int VALID_UNIT = 10;
-    private static final int VALID_REMAINED_AMOUNT = 0;
 
     private int totalAmount;
 
@@ -26,12 +25,12 @@ public class TotalAmount {
         }
         if (isInvalidAmount(totalAmount)) {
             throw new IllegalArgumentException(
-                    String.format("자판기가 보유한 금액은 %d원 단위어야 합니다.", VALID_UNIT));
+                    String.format("자판기가 보유한 금액은 %d원 단위어야 합니다.", Constants.VALID_UNIT));
         }
     }
 
     private boolean isInvalidAmount(int totalAmount) {
-        return totalAmount % VALID_UNIT != VALID_REMAINED_AMOUNT;
+        return totalAmount % Constants.VALID_UNIT != Constants.VALID_REMAINED_AMOUNT;
     }
 
     public List<Integer> findInterchangeableCounts(Coin coin) {

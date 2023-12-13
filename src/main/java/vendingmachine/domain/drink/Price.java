@@ -1,11 +1,11 @@
 package vendingmachine.domain.drink;
 
+import vendingmachine.utils.Constants;
+
 import java.util.Objects;
 
 public class Price {
     private static final int MINIMUM_PRICE = 100;
-    private static final int VALID_UNIT = 10;
-    private static final int VALID_REMAINED_AMOUNT = 0;
 
     private final int price;
 
@@ -21,12 +21,12 @@ public class Price {
         }
         if (isInvalidPrice(price)) {
             throw new IllegalArgumentException(
-                    String.format("상품 가격은 %d원 단위어야 합니다.", VALID_UNIT));
+                    String.format("상품 가격은 %d원 단위어야 합니다.", Constants.VALID_UNIT));
         }
     }
 
     private boolean isInvalidPrice(int price) {
-        return price % VALID_UNIT != VALID_REMAINED_AMOUNT;
+        return price % Constants.VALID_UNIT != Constants.VALID_REMAINED_AMOUNT;
     }
 
     @Override
