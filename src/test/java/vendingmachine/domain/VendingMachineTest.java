@@ -87,8 +87,4 @@ class VendingMachineTest {
 
         assertThat(result).isFalse();
     }
-
-    @Test
-    void giveChange() {
-    }
 }
