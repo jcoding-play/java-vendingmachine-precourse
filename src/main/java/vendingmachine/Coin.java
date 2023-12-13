@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import java.util.Arrays;
+
 public enum Coin {
     COIN_500(500),
     COIN_100(100),
@@ -10,6 +12,17 @@ public enum Coin {
 
     Coin(final int amount) {
         this.amount = amount;
+    }
+
+    public static Coin from(int amount) {
+        return Arrays.stream(values())
+                .filter(coin -> coin.isMatchAmount(amount))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("일치하는 동전이 없습니다."));
+    }
+
+    private boolean isMatchAmount(int amount) {
+        return this.amount == amount;
     }
 
     public int divide(int amount) {

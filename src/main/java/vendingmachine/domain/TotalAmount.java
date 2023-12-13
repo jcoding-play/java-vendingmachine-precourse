@@ -41,9 +41,16 @@ public class TotalAmount {
                 .collect(Collectors.toList());
     }
 
-    public void subtractBy(Coin coin, int quantity) {
-        int amount = coin.calculateTotalAmount(quantity);
+    public void subtractBy(int amount) {
         totalAmount -= amount;
+    }
+
+    public boolean isGreaterThan(int amount) {
+        return totalAmount > amount;
+    }
+
+    public boolean isEqual(int amount) {
+        return totalAmount == amount;
     }
 
     @Override
