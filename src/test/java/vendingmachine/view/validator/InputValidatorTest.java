@@ -42,4 +42,13 @@ class InputValidatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("상품명과 가격, 수량에 대한 입력 형식이 올바르지 않습니다.");
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"a", "!", "12A"})
+    @DisplayName("투입 금액에 대한 입력이 숫자가 아니면 예외가 발생한다.")
+    void validateInputAmount(String input) {
+        assertThatThrownBy(() -> inputValidator.validateInputAmount(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("투입 금액에 대한 입력은 숫자만 가능합니다.");
+    }
 }
