@@ -30,6 +30,12 @@ class DrinkTest {
     }
 
     @Test
+    @DisplayName("수량을 줄일 수 있다.")
     void decreaseQuantity() {
+        Drink drink = new Drink("콜라", 1500, 1);
+        assertThat(drink.isSoldOut()).isFalse();
+
+        drink.decreaseQuantity();
+        assertThat(drink.isSoldOut()).isTrue();
     }
 }
