@@ -30,7 +30,7 @@ public class VendingMachine {
     }
 
     private boolean isNotInVendingMachine(String drinkName) {
-        return drinks.contain(drinkName);
+        return !drinks.contain(drinkName);
     }
 
     private void sell(Drink drink) {
