@@ -25,6 +25,10 @@ public class RandomCoinGenerator implements CoinGenerator {
 
     private int pickQuantity(TotalAmount totalAmount, Coin coin) {
         List<Integer> interchangeableCounts = totalAmount.findInterchangeableCounts(coin);
+
+        if (coin.isTenCoin()) {
+            return interchangeableCounts.get(interchangeableCounts.size() - 1);
+        }
         return Randoms.pickNumberInList(interchangeableCounts);
     }
 }
