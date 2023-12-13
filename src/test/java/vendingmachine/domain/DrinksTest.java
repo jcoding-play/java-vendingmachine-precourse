@@ -62,4 +62,16 @@ class DrinksTest {
         boolean actual = drinks.isSoldOut();
         assertThat(actual).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"콜라, true", "사이다, true", "환타, false"})
+    @DisplayName("상품들 중 해당 이름과 같은 음료를 포함하는지 알 수 있다.")
+    void contain(String name, boolean expected) {
+        Drinks drinks = new Drinks(Arrays.asList(
+                new Drink("콜라", 1500, 10),
+                new Drink("사이다", 1000, 20)));
+
+        boolean actual = drinks.contain(name);
+        assertThat(actual).isEqualTo(expected);
+    }
 }
