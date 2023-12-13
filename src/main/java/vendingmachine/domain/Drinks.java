@@ -1,7 +1,6 @@
 package vendingmachine.domain;
 
 import vendingmachine.domain.drink.Drink;
-import vendingmachine.domain.drink.Price;
 
 import java.util.List;
 import java.util.Objects;
@@ -33,10 +32,10 @@ public class Drinks {
                 .count() != drinks.size();
     }
 
-    public Price findMinimumPrice() {
+    public int findMinimumPrice() {
         return drinks.stream()
+                .min(Drink::compareTo)
                 .map(Drink::getPrice)
-                .min(Price::compareTo)
                 .get();
     }
 

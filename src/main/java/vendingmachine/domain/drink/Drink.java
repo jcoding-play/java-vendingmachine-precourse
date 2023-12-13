@@ -2,7 +2,7 @@ package vendingmachine.domain.drink;
 
 import java.util.Objects;
 
-public class Drink {
+public class Drink implements Comparable<Drink> {
     private Name name;
     private Price price;
     private Quantity quantity;
@@ -44,5 +44,10 @@ public class Drink {
     @Override
     public int hashCode() {
         return Objects.hash(name, price, quantity);
+    }
+
+    @Override
+    public int compareTo(Drink other) {
+        return this.price.compareTo(other.price);
     }
 }
