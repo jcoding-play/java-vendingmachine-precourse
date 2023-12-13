@@ -74,4 +74,15 @@ class DrinksTest {
         boolean actual = drinks.contain(name);
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("이름을 통해 음료를 찾을 수 있다.")
+    void findDrinkFrom() {
+        Drinks drinks = new Drinks(Arrays.asList(
+                new Drink("콜라", 1500, 10),
+                new Drink("사이다", 1000, 20)));
+
+        Drink drink = drinks.findDrinkFrom("콜라");
+        assertThat(drink).isEqualTo(new Drink("콜라", 1500, 10));
+    }
 }
