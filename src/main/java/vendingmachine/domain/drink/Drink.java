@@ -25,12 +25,12 @@ public class Drink {
         quantity.decrease();
     }
 
-    public Name getName() {
-        return name;
+    public String getName() {
+        return name.get();
     }
 
-    public Price getPrice() {
-        return price;
+    public int getPrice() {
+        return price.get();
     }
 
     @Override

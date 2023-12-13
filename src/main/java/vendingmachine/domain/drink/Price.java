@@ -33,6 +33,10 @@ public class Price implements Comparable<Price> {
         return inputAmount - price;
     }
 
+    public int get() {
+        return price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
