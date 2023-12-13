@@ -50,4 +50,13 @@ class TotalAmountTest {
         boolean actual = totalAmount.isGreaterThan(amount);
         assertThat(actual).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1100, false", "1000, true"})
+    @DisplayName("입력된 값과 같은지 알 수 있다.")
+    void isEqual(int amount, boolean expected) {
+        TotalAmount totalAmount = new TotalAmount(1000);
+        boolean actual = totalAmount.isEqual(amount);
+        assertThat(actual).isEqualTo(expected);
+    }
 }
