@@ -31,6 +31,10 @@ public class InputAmount {
         inputAmount -= price;
     }
 
+    public boolean isLessThan(int minimumPrice) {
+        return inputAmount < minimumPrice;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

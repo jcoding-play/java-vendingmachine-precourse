@@ -32,4 +32,10 @@ public class VendingMachine {
         inputAmount.subtractBy(drink.getPrice());
         drink.decreaseQuantity();
     }
+
+    public boolean canBuyDrink() {
+        int minimumPrice = drinks.findMinimumPrice();
+
+        return !(inputAmount.isLessThan(minimumPrice) || drinks.isSoldOut());
+    }
 }
