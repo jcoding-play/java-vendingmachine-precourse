@@ -19,4 +19,8 @@ public enum Coin {
     public int calculateTotalAmount(int quantity) {
         return this.amount * quantity;
     }
+
+    public int getAmount() {
+        return amount;
+    }
 }
