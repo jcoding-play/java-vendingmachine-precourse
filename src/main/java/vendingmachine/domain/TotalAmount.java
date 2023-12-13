@@ -1,12 +1,8 @@
 package vendingmachine.domain;
 
-import vendingmachine.Coin;
 import vendingmachine.utils.Constants;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class TotalAmount {
     private int totalAmount;
@@ -29,16 +25,6 @@ public class TotalAmount {
 
     private boolean isInvalidAmount(int totalAmount) {
         return totalAmount % Constants.VALID_UNIT != Constants.VALID_REMAINED_AMOUNT;
-    }
-
-    public List<Integer> findInterchangeableCounts(Coin coin) {
-        return findInterchangeableCounts(coin.divide(totalAmount));
-    }
-
-    private List<Integer> findInterchangeableCounts(int result) {
-        return IntStream.rangeClosed(0, result)
-                .boxed()
-                .collect(Collectors.toList());
     }
 
     public void subtractBy(int amount) {
