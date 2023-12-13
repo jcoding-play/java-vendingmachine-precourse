@@ -4,7 +4,7 @@ import vendingmachine.utils.Constants;
 
 import java.util.Objects;
 
-public class Price {
+public class Price implements Comparable<Price> {
     private static final int MINIMUM_PRICE = 100;
 
     private final int price;
@@ -40,5 +40,10 @@ public class Price {
     @Override
     public int hashCode() {
         return Objects.hash(price);
+    }
+
+    @Override
+    public int compareTo(Price other) {
+        return this.price - other.price;
     }
 }
